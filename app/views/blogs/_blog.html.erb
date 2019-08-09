@@ -1,0 +1,26 @@
+<div class="card large">
+<div class="content_post" style="background-image: url(<%= blog.image %>);">
+  <div class="more">
+    <span><%= image_tag 'arrow_top.png' %></span>
+    <ul class="more_list">
+      <li>
+        <%= link_to "詳細", blog_path(blog.id), method: :get %>
+      </li>
+      <% if user_signed_in? && current_user.id == blog.user_id %>
+        <li>
+          <%= link_to '編集', "/blogs/#{blog.id}/edit", method: :get %>
+        </li>
+        <li>
+          <%= link_to '削除', "/blogs/#{blog.id}", method: :delete %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <span class="name">
+    <a href="/users/<%= blog.user_id %>">
+      <span>投稿者</span><%= blog.user.nickname %>
+    </a>
+  </span>
+  </div>
+    <%= simple_format(blog.text) %>
+</div>
